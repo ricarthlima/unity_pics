@@ -34,6 +34,7 @@ public class MG02GameController : MonoBehaviour
         if (blockSelected == null)
         {
             blockSelected = block;
+            block.GetComponent<BlockController>().ShowIndicatorCircle();
         }
         else
         {

@@ -335,7 +335,7 @@ MonoBehaviour:
   - {r: 0.4339623, g: 0.0102349585, b: 0.42249095, a: 0}
   - {r: 0.024430392, g: 0.096984945, b: 0.5754717, a: 0}
   startPoint: {x: -2.469, y: 1.174}
-  sizeCell: {x: 0.364, y: -0.364}
+  sizeCell: {x: 0.356, y: -0.356}
   rateStaticBlocks: 0.45
 --- !u!4 &1617157462
 Transform:

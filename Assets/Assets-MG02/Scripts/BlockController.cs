@@ -5,13 +5,18 @@ using UnityEngine;
 
 public class BlockController : MonoBehaviour
 {
+    [Header("Indicators")]
+    [SerializeField] private GameObject indicatorBlock;
+    [SerializeField] private GameObject indicatorCircle;
+    [SerializeField] private GameObject indicatorCorrect;
+
     [Header("Position Puzzle")]
     public int x;
     public int y;
     public bool isStatic = false;
 
     public Color baseColor;
-    float speed = 3;
+    float speed = 2.5f;
 
     Vector3 destination;
     bool isMoving;
@@ -20,6 +25,11 @@ public class BlockController : MonoBehaviour
     {
         Color newColor = new Color(baseColor.r, baseColor.g, baseColor.b, 0.666f);
         GetComponent<SpriteRenderer>().color = newColor;
+
+        if (isStatic)
+        {
+            indicatorBlock.SetActive(true);
+        }
     }
 
     // Update is called once per frame
@@ -31,6 +41,7 @@ public class BlockController : MonoBehaviour
             if (transform.position == destination)
             {
                 isMoving = false;
+                indicatorCircle.SetActive(false);
             }
         }
     }
@@ -39,5 +50,10 @@ public class BlockController : MonoBehaviour
     {
         isMoving = true;
         destination = position;
+    }
+
+    public void ShowIndicatorCircle()
+    {
+        indicatorCircle.SetActive(true);
     }
 }
