@@ -37,9 +37,8 @@ public class MG02GameController : MonoBehaviour
         }
         else
         {
-            Vector2 finalPos = block.transform.position;
-            block.transform.position = blockSelected.transform.position;
-            blockSelected.transform.position = finalPos;
+            blockSelected.GetComponent<BlockController>().MoveTo(block.transform.position);
+            block.GetComponent<BlockController>().MoveTo(blockSelected.transform.position);
             blockSelected = null;
         }
     }

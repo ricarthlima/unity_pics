@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseColor: {r: 1, g: 0, b: 0, a: 1}
+  speed: 3
 --- !u!61 &6275558216711133197
 BoxCollider2D:
   m_ObjectHideFlags: 0
