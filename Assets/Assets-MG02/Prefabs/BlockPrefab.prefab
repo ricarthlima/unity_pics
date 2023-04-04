@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 9e09548d53b4ee848af4e74cfa7741a3, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5803922}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -158,7 +158,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6954700e67556974e932ec6934063ce7, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5803922}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -272,8 +272,7 @@ MonoBehaviour:
   indicatorBlock: {fileID: 7139000433919799417}
   indicatorCircle: {fileID: 5730034740437554692}
   indicatorCorrect: {fileID: 1079164030530570128}
-  x: 0
-  y: 0
+  correctPosition: {x: 0, y: 0, z: 0}
   isStatic: 0
   baseColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!61 &6275558216711133197
@@ -376,7 +375,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 20685bed72f0e8d41a3aa8e067d98fec, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5803922}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

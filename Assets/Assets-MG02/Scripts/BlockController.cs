@@ -11,7 +11,7 @@ public class BlockController : MonoBehaviour
     [SerializeField] private GameObject indicatorCorrect;
 
     [Header("Position Puzzle")]
-    public Vector2 correctPosition;
+    public Vector3 correctPosition;
     public bool isStatic = false;
 
     public Color baseColor;
@@ -27,7 +27,7 @@ public class BlockController : MonoBehaviour
 
         if (isStatic)
         {
-            indicatorBlock.SetActive(true);
+            indicatorCorrect.SetActive(true);
         }
     }
 
@@ -41,6 +41,12 @@ public class BlockController : MonoBehaviour
             {
                 isMoving = false;
                 indicatorCircle.SetActive(false);
+
+                if (transform.position == correctPosition)
+                {
+                    indicatorCorrect.SetActive(true);
+                    isStatic = true;
+                }
             }
         }
     }

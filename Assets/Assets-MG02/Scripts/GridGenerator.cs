@@ -39,6 +39,7 @@ public class GridGenerator : MonoBehaviour
 
                 blockController.correctPosition.x = x;
                 blockController.correctPosition.y = y;
+                blockController.correctPosition.z = block.transform.position.z;
 
                 blockController.baseColor = currentColor;
                 blockController.isStatic = DefineStaticBlock();
