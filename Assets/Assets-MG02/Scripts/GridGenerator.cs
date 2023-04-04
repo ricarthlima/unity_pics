@@ -16,6 +16,9 @@ public class GridGenerator : MonoBehaviour
 
     public float rateStaticBlocks;
 
+    public List<GameObject> toShuffleBlocks = new List<GameObject>();
+    public bool isFinishedInstantiate = false;
+
     void Start()
     {
         for (int i = 0; i < listColorsStart.Length; i++)
@@ -34,14 +37,21 @@ public class GridGenerator : MonoBehaviour
                 GameObject block = Instantiate(blockPrefab, new Vector3(x,y,0), Quaternion.identity);
                 BlockController blockController = block.GetComponent<BlockController>();
 
-                blockController.x = j;
-                blockController.y = i;
+                blockController.correctPosition.x = x;
+                blockController.correctPosition.y = y;
 
                 blockController.baseColor = currentColor;
                 blockController.isStatic = DefineStaticBlock();
+
+                if (!blockController.isStatic)
+                {
+                    toShuffleBlocks.Add(block);
+                }
                 
             }
         }
+
+        isFinishedInstantiate = true;
     }
 
     void Update()

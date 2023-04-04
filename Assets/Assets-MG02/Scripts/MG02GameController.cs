@@ -5,10 +5,50 @@ using UnityEngine;
 public class MG02GameController : MonoBehaviour
 {
     public GameObject blockSelected;
+    public GameObject gridGeneratorGameObject;
+    GridGenerator gridGenerator;
+
+    [Header("Shuffle")]
+    bool isShuffled = false;
+    float countToShuffle = 0;
+
+    private void Start()
+    {
+        gridGenerator = gridGeneratorGameObject.GetComponent<GridGenerator>();
+    }
 
     private void Update()
     {
         VerifyClick();
+        NeedToShuffle();
+    }
+
+    void NeedToShuffle()
+    {
+        if (!isShuffled && gridGenerator.isFinishedInstantiate)
+        {
+            countToShuffle += Time.deltaTime;
+            if (countToShuffle < 1)
+            {
+                return;
+            }
+
+            int centerList = (gridGenerator.toShuffleBlocks.Count / 2) - 1;
+            List<GameObject> listKings = gridGenerator.toShuffleBlocks.GetRange(0, centerList);
+            List<GameObject> listQueens = gridGenerator.toShuffleBlocks.GetRange(centerList, centerList);
+
+            foreach (GameObject king in listKings)
+            {
+                int queenNumber = Random.Range(0, listQueens.Count-1);
+                GameObject chosenQueen = listQueens[queenNumber];
+
+                king.GetComponent<BlockController>().MoveTo(chosenQueen.transform.position);
+                chosenQueen.GetComponent<BlockController>().MoveTo(king.transform.position);
+
+                listQueens.RemoveAt(queenNumber);
+            }
+            isShuffled = true;
+        }
     }
 
     void VerifyClick()
@@ -31,17 +71,23 @@ public class MG02GameController : MonoBehaviour
 
     public void OnBlockTouched(GameObject block)
     {
-        if (blockSelected == null)
+        BlockController blockClickedController = block.GetComponent<BlockController>();
+
+        if (!blockClickedController.isStatic)
         {
-            blockSelected = block;
-            block.GetComponent<BlockController>().ShowIndicatorCircle();
+            if (blockSelected == null)
+            {
+                blockSelected = block;
+                blockClickedController.ShowIndicatorCircle();
+            }
+            else
+            {
+                blockSelected.GetComponent<BlockController>().MoveTo(block.transform.position);
+                blockClickedController.MoveTo(blockSelected.transform.position);
+                blockSelected = null;
+            }
         }
-        else
-        {
-            blockSelected.GetComponent<BlockController>().MoveTo(block.transform.position);
-            block.GetComponent<BlockController>().MoveTo(blockSelected.transform.position);
-            blockSelected = null;
-        }
+        
     }
 
 

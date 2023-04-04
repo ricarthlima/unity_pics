@@ -11,12 +11,11 @@ public class BlockController : MonoBehaviour
     [SerializeField] private GameObject indicatorCorrect;
 
     [Header("Position Puzzle")]
-    public int x;
-    public int y;
+    public Vector2 correctPosition;
     public bool isStatic = false;
 
     public Color baseColor;
-    float speed = 2.5f;
+    float speed = 2;
 
     Vector3 destination;
     bool isMoving;
