@@ -15,7 +15,7 @@ public class BlockController : MonoBehaviour
     public bool isStatic = false;
 
     public Color baseColor;
-    float speed = 2;
+    float speed = 4;
 
     Vector3 destination;
     bool isMoving;
@@ -47,6 +47,9 @@ public class BlockController : MonoBehaviour
                     indicatorCorrect.SetActive(true);
                     isStatic = true;
                 }
+
+                //TODO: Substituir por emit
+                GameObject.Find("MG02GameController").GetComponent<MG02GameController>().FreeClick();
             }
         }
     }

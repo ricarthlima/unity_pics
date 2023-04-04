@@ -12,6 +12,8 @@ public class MG02GameController : MonoBehaviour
     bool isShuffled = false;
     float countToShuffle = 0;
 
+    bool canClick = false;
+
     private void Start()
     {
         gridGenerator = gridGeneratorGameObject.GetComponent<GridGenerator>();
@@ -48,12 +50,14 @@ public class MG02GameController : MonoBehaviour
                 listQueens.RemoveAt(queenNumber);
             }
             isShuffled = true;
+            canClick = true;
         }
+       
     }
 
     void VerifyClick()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (canClick && Input.GetMouseButtonDown(0))
         {
             RaycastHit2D[] hits = Physics2D.RaycastAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             foreach (RaycastHit2D hit in hits)
@@ -85,10 +89,15 @@ public class MG02GameController : MonoBehaviour
                 blockSelected.GetComponent<BlockController>().MoveTo(block.transform.position);
                 blockClickedController.MoveTo(blockSelected.transform.position);
                 blockSelected = null;
+                canClick = false;
             }
         }
         
     }
 
+    public void FreeClick()
+    {
+        canClick = true;
+    }
 
 }
