@@ -12,7 +12,8 @@ public class MG02GameController : MonoBehaviour
     int countMoves = 0;
 
     [Header("Canva")]
-    [SerializeField] TextMeshProUGUI textMoves;
+    [SerializeField] private TextMeshProUGUI textMoves;
+    [SerializeField] private GameObject[] listTextLines;
 
     [Header("Shuffle")]
     bool isShuffled = false;
@@ -41,7 +42,7 @@ public class MG02GameController : MonoBehaviour
                 return;
             }
 
-            int centerList = (gridGenerator.toShuffleBlocks.Count / 2) - 1;
+            int centerList = (gridGenerator.toShuffleBlocks.Count / 2);
             List<GameObject> listKings = gridGenerator.toShuffleBlocks.GetRange(0, centerList);
             List<GameObject> listQueens = gridGenerator.toShuffleBlocks.GetRange(centerList, centerList);
 
@@ -107,6 +108,50 @@ public class MG02GameController : MonoBehaviour
     public void FreeClick()
     {
         canClick = true;
+        VerifyGameProgress();
     }
 
+    void VerifyGameProgress()
+    {
+        List<List<GameObject>> blockInRightPositions = gridGenerator.blockInRightPositions;
+        bool isGameCompleted = true;
+
+        for (int lineIndex = 0; lineIndex < blockInRightPositions.Count; lineIndex++)
+        {
+            List<GameObject> lineList = blockInRightPositions[lineIndex];
+
+            bool isLineCompleted = true;
+
+            foreach (GameObject block in lineList)
+            {
+                if (!block.GetComponent<BlockController>().isStatic)
+                {
+                    isLineCompleted = false;
+                    isGameCompleted = false;
+                    break;
+                }
+            }
+
+            if (isLineCompleted)
+            {
+                Debug.Log("LINHA " + lineIndex + " COMPLETA!");
+                LineCompleted(lineIndex);
+            }
+        }
+
+        if (isGameCompleted)
+        {
+            EndGame();
+        }
+    }
+
+    void LineCompleted(int index)
+    {
+        listTextLines[index].gameObject.SetActive(true);
+    }
+
+    void EndGame()
+    {
+
+    }
 }

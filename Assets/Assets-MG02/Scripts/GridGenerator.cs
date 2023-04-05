@@ -17,7 +17,10 @@ public class GridGenerator : MonoBehaviour
     public float rateStaticBlocks;
 
     public List<GameObject> toShuffleBlocks = new List<GameObject>();
-    public bool isFinishedInstantiate = false;
+    [HideInInspector] public bool isFinishedInstantiate = false;
+
+    [HideInInspector]
+    public List<List<GameObject>> blockInRightPositions = new List<List<GameObject>>();
 
     void Start()
     {
@@ -25,6 +28,8 @@ public class GridGenerator : MonoBehaviour
         {
             Color currentColorStart = listColorsStart[i];
             Color currentColorEnd = listColorsEnd[i];
+
+            List<GameObject> blocksLine = new List<GameObject>();
 
             for (int j = 0; j < gridColumns; j++)
             {                
@@ -49,7 +54,10 @@ public class GridGenerator : MonoBehaviour
                     toShuffleBlocks.Add(block);
                 }
                 
+                blocksLine.Add(block);
             }
+
+            blockInRightPositions.Add(blocksLine);
         }
 
         isFinishedInstantiate = true;
