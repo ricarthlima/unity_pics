@@ -789,7 +789,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8077998490146334948, guid: 7b0b646c81729404c92ca73e081ad7fc, type: 3}
       propertyPath: rateStaticBlocks
-      value: 0.33
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8077998490146334949, guid: 7b0b646c81729404c92ca73e081ad7fc, type: 3}
       propertyPath: m_Name
@@ -1609,8 +1609,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 157.41998, y: -50}
-  m_SizeDelta: {x: 225, y: 50}
+  m_AnchoredPosition: {x: 200, y: -45.100006}
+  m_SizeDelta: {x: 163.6, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1193392749
 MonoBehaviour:
@@ -1659,8 +1659,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 25.2
+  m_fontSizeBase: 25.2
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2087,8 +2087,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 157.41998, y: -50}
-  m_SizeDelta: {x: 225, y: 50}
+  m_AnchoredPosition: {x: 200, y: -45.100006}
+  m_SizeDelta: {x: 163.6, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1691610206
 MonoBehaviour:
@@ -2137,8 +2137,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 25.2
+  m_fontSizeBase: 25.2
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
