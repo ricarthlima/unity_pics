@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class MG02GameController : MonoBehaviour
@@ -7,6 +8,11 @@ public class MG02GameController : MonoBehaviour
     public GameObject blockSelected;
     public GameObject gridGeneratorGameObject;
     GridGenerator gridGenerator;
+
+    int countMoves = 0;
+
+    [Header("Canva")]
+    [SerializeField] TextMeshProUGUI textMoves;
 
     [Header("Shuffle")]
     bool isShuffled = false;
@@ -90,6 +96,9 @@ public class MG02GameController : MonoBehaviour
                 blockClickedController.MoveTo(blockSelected.transform.position);
                 blockSelected = null;
                 canClick = false;
+
+                countMoves += 1;
+                textMoves.text = countMoves.ToString();
             }
         }
         

@@ -66,6 +66,6 @@ MonoBehaviour:
   - {r: 0.99607843, g: 0.95686275, b: 0.73333335, a: 0}
   startPoint: {x: -2.469, y: 1.174}
   sizeCell: {x: 0.356, y: -0.356}
-  rateStaticBlocks: 0.33
+  rateStaticBlocks: 0.45
   toShuffleBlocks: []
   isFinishedInstantiate: 0
