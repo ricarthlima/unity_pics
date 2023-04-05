@@ -47,13 +47,23 @@ public class GridGenerator : MonoBehaviour
                 blockController.correctPosition.z = block.transform.position.z;
 
                 blockController.baseColor = currentColor;
-                blockController.isStatic = DefineStaticBlock();
+
+                if (j == 0 || j == gridColumns - 1)
+                {
+                    blockController.isStatic = true;
+                }
+                else
+                {
+                    blockController.isStatic = DefineStaticBlock();                    
+                }
 
                 if (!blockController.isStatic)
                 {
                     toShuffleBlocks.Add(block);
                 }
-                
+
+
+
                 blocksLine.Add(block);
             }
 
