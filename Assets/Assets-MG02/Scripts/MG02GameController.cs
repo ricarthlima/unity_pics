@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MG02GameController : MonoBehaviour
 {
-    public GameObject blockSelected;
+    [HideInInspector] public GameObject blockSelected;
     public GameObject gridGeneratorGameObject;
     GridGenerator gridGenerator;
 
@@ -13,6 +13,7 @@ public class MG02GameController : MonoBehaviour
 
     [Header("Canva")]
     [SerializeField] private TextMeshProUGUI textMoves;
+    [SerializeField] private TextMeshProUGUI textTime;
     [SerializeField] private GameObject[] listTextLines;
 
     [Header("Shuffle")]
@@ -20,6 +21,8 @@ public class MG02GameController : MonoBehaviour
     float countToShuffle = 0;
 
     bool canClick = false;
+
+    float timeCount = 0;
 
     private void Start()
     {
@@ -30,6 +33,13 @@ public class MG02GameController : MonoBehaviour
     {
         VerifyClick();
         NeedToShuffle();
+        UpdateTime();
+    }
+
+    private void UpdateTime()
+    {
+        timeCount += Time.deltaTime;
+        textTime.text = Mathf.FloorToInt(timeCount).ToString();
     }
 
     void NeedToShuffle()
