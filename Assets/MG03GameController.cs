@@ -25,6 +25,7 @@ public class MG03GameController : MonoBehaviour
 
     void Start()
     {
+        groupButtons.SetActive(false);
         m_Camera.gameObject.transform.position = new Vector3(-1.51f, -3f, -10);
     }
 
