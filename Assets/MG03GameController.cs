@@ -108,7 +108,7 @@ public class MG03GameController : MonoBehaviour
     public void OnClickReiniciar()
     {
         layerCadeirante.color = new Color(1,1,1,0);
-        layerNanismo.color = new Color(1, 1, 1, 0);
+        layerNanismo.color = new Color(1, 1, 1, 1);
         layerPessoaCega.color = new Color(1, 1, 1, 0);
         layerPessoaMuda.color = new Color(1, 1, 1, 0);
         layerPortasLargas.color = new Color(1, 1, 1, 0);
@@ -140,10 +140,22 @@ public class MG03GameController : MonoBehaviour
 
     private void LerpLayer()
     {
-        toActiveSprite.color = Color.Lerp(toActiveSprite.color, Color.white, Time.deltaTime * 10);
-        if (toActiveSprite.color == Color.white)
+        if (toActiveSprite == layerNanismo)
         {
-            toActiveSprite = null;
-        }        
+            toActiveSprite.color = Color.Lerp(toActiveSprite.color, new Color(1, 1, 1, 0), Time.deltaTime * 10);
+            if (toActiveSprite.color == new Color(1,1,1,0) )
+            {
+                toActiveSprite = null;
+            }
+        }
+        else
+        {
+            toActiveSprite.color = Color.Lerp(toActiveSprite.color, Color.white, Time.deltaTime * 10);
+            if (toActiveSprite.color == Color.white)
+            {
+                toActiveSprite = null;
+            }
+        }
+               
     }
 }
