@@ -5,13 +5,16 @@ using UnityEngine.Rendering;
 
 public class MG03GameController : MonoBehaviour
 {
+    [Header("Controlllers")]
+    [SerializeField] MG03CardController cardController;
+
     [Header("Camera")]
     [SerializeField] private Camera m_Camera;
     private bool animateCamera = false;
     private bool isTouchedZoom = false;
 
     [Header("Layers")]
-    [SerializeField] private GameObject groupButtons;
+    [SerializeField] private GameObject uiGameObject;
     [SerializeField] private SpriteRenderer layerCadeirante;
     [SerializeField] private SpriteRenderer layerNanismo;
     [SerializeField] private SpriteRenderer layerPessoaCega;
@@ -22,10 +25,11 @@ public class MG03GameController : MonoBehaviour
 
     [Header("Game")]
     public bool canInteract = false;
+    [SerializeField] int round = 0;
 
     void Start()
     {
-        groupButtons.SetActive(false);
+        uiGameObject.SetActive(false);
         m_Camera.gameObject.transform.position = new Vector3(-1.51f, -3f, -10);
     }
 
@@ -41,7 +45,8 @@ public class MG03GameController : MonoBehaviour
             if (!canInteract)
             {
                 canInteract = true;
-                groupButtons.SetActive(true);
+                uiGameObject.SetActive(true);
+                StartGame();
             }
         }
         
@@ -80,40 +85,13 @@ public class MG03GameController : MonoBehaviour
 
 
     }
-    //  Nanismo, PessoaCega, PessoaMuda, PortasLargas, Reiniciar
-    public void OnClickCadeirante()
+
+    void StartGame()
     {
-        OnClickAnimation(Layers.Cadeirante);
+        cardController.ShowCard(round);
     }
 
-    public void OnClickNanismo()
-    {
-        OnClickAnimation(Layers.Nanismo);
-    }
-
-    public void OnClickPessoaCega()
-    {
-        OnClickAnimation(Layers.PessoaCega);
-    }
-
-    public void OnClickPessoaMuda()
-    {
-        OnClickAnimation(Layers.PessoaMuda);
-    }
-
-    public void OnClickPortasLargas()
-    {
-        OnClickAnimation(Layers.PortasLargas);
-    }
-
-    public void OnClickReiniciar()
-    {
-        layerCadeirante.color = new Color(1,1,1,0);
-        layerNanismo.color = new Color(1, 1, 1, 1);
-        layerPessoaCega.color = new Color(1, 1, 1, 0);
-        layerPessoaMuda.color = new Color(1, 1, 1, 0);
-        layerPortasLargas.color = new Color(1, 1, 1, 0);
-    }
+   
 
     private void OnClickAnimation(Layers layer)
     {          
@@ -159,4 +137,42 @@ public class MG03GameController : MonoBehaviour
         }
                
     }
+
+    #region "Testes Iniciais"
+    //  Nanismo, PessoaCega, PessoaMuda, PortasLargas, Reiniciar
+    public void OnClickCadeirante()
+    {
+        OnClickAnimation(Layers.Cadeirante);
+    }
+
+    public void OnClickNanismo()
+    {
+        OnClickAnimation(Layers.Nanismo);
+    }
+
+    public void OnClickPessoaCega()
+    {
+        OnClickAnimation(Layers.PessoaCega);
+    }
+
+    public void OnClickPessoaMuda()
+    {
+        OnClickAnimation(Layers.PessoaMuda);
+    }
+
+    public void OnClickPortasLargas()
+    {
+        OnClickAnimation(Layers.PortasLargas);
+    }
+
+    public void OnClickReiniciar()
+    {
+        layerCadeirante.color = new Color(1, 1, 1, 0);
+        layerNanismo.color = new Color(1, 1, 1, 1);
+        layerPessoaCega.color = new Color(1, 1, 1, 0);
+        layerPessoaMuda.color = new Color(1, 1, 1, 0);
+        layerPortasLargas.color = new Color(1, 1, 1, 0);
+    }
+
+    #endregion
 }
