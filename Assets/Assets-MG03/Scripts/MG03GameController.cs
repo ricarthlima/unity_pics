@@ -119,23 +119,11 @@ public class MG03GameController : MonoBehaviour
 
     private void LerpLayer()
     {
-        if (toActiveSprite == layerNanismo)
+        toActiveSprite.color = Color.Lerp(toActiveSprite.color, Color.white, Time.deltaTime * 10);
+        if (toActiveSprite.color == Color.white)
         {
-            toActiveSprite.color = Color.Lerp(toActiveSprite.color, new Color(1, 1, 1, 0), Time.deltaTime * 10);
-            if (toActiveSprite.color == new Color(1,1,1,0) )
-            {
-                toActiveSprite = null;
-            }
+            toActiveSprite = null;
         }
-        else
-        {
-            toActiveSprite.color = Color.Lerp(toActiveSprite.color, Color.white, Time.deltaTime * 10);
-            if (toActiveSprite.color == Color.white)
-            {
-                toActiveSprite = null;
-            }
-        }
-               
     }
 
     #region "Testes Iniciais"
