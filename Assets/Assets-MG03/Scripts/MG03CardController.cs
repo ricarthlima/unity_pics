@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class MG03CardController : MonoBehaviour
 {
+    [Header("Controllers")]
+    [SerializeField] private MG03GameController gameController;
+
     [Header("GameObject")]
     [SerializeField] private GameObject groupCard;
 
@@ -30,7 +33,7 @@ public class MG03CardController : MonoBehaviour
     public void ShowCard(int round)
     {
         // Por a pessoa no card
-        imagePerson.texture = listPersonByRound[0];
+        imagePerson.texture = listPersonByRound[round];
 
         // Sortear o botão correto
         correctButton = Random.Range(0, 2);
@@ -41,6 +44,34 @@ public class MG03CardController : MonoBehaviour
         switch (round)
         {
             case 0:
+                listButtons[correctButton].image.sprite = iconCadeirante;
+                buttonSprites.Remove(iconCadeirante);
+                break;
+            case 1:
+                listButtons[correctButton].image.sprite = iconVisual;
+                buttonSprites.Remove(iconVisual);
+                break;
+            case 2:
+                listButtons[correctButton].image.sprite = iconSurdez;
+                buttonSprites.Remove(iconSurdez);
+                break;
+            case 3:
+                listButtons[correctButton].image.sprite = iconCadeirante;
+                buttonSprites.Remove(iconCadeirante);
+                break;
+            case 4:
+                listButtons[correctButton].image.sprite = iconNanismo;
+                buttonSprites.Remove(iconNanismo);
+                break;
+            case 5:
+                listButtons[correctButton].image.sprite = iconSurdez;
+                buttonSprites.Remove(iconSurdez);
+                break;
+            case 6:
+                listButtons[correctButton].image.sprite = iconVisual;
+                buttonSprites.Remove(iconVisual);
+                break;
+            case 7:
                 listButtons[correctButton].image.sprite = iconCadeirante;
                 buttonSprites.Remove(iconCadeirante);
                 break;
@@ -62,6 +93,7 @@ public class MG03CardController : MonoBehaviour
 
     public void HideCard()
     {
+        ResetCard();
         groupCard.SetActive(false);
     }
 
@@ -82,6 +114,7 @@ public class MG03CardController : MonoBehaviour
         if (button == correctButton)
         {
             //TODO: Tocar som de vitoria
+            gameController.CorrectCardSelect();
         }
         else
         {

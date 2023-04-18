@@ -44,17 +44,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d8f5c1125c1813458f5252f25b04397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameController: {fileID: 0}
   groupCard: {fileID: 0}
   imagePerson: {fileID: 0}
   listPersonByRound:
   - {fileID: 2800000, guid: dd911d72057819e47ac820adc08bc505, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2800000, guid: 272ad30108d14c64db43fd20a1482583, type: 3}
+  - {fileID: 2800000, guid: 187635f8da6a98b4689aa20f158d46a8, type: 3}
+  - {fileID: 2800000, guid: 4b978b8a57207dd4dae1f2b167f2a054, type: 3}
+  - {fileID: 2800000, guid: bf79fb3e1c752194c84d1610a240669c, type: 3}
+  - {fileID: 2800000, guid: 9e23bd676cdc8224792dd1182e5fdfa0, type: 3}
+  - {fileID: 2800000, guid: 004797d6e68293d469e80ba14d19959c, type: 3}
+  - {fileID: 2800000, guid: 798b973d44db6da4eb8a17ef85cd7ec0, type: 3}
   listButtons:
   - {fileID: 0}
   - {fileID: 0}

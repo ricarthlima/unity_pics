@@ -126,6 +126,14 @@ public class MG03GameController : MonoBehaviour
         }
     }
 
+    public void CorrectCardSelect()
+    {
+        cardController.HideCard();
+        //TESTE
+        round += 1;
+        cardController.ShowCard(round);
+    }
+
     #region "Testes Iniciais"
     //  Nanismo, PessoaCega, PessoaMuda, PortasLargas, Reiniciar
     public void OnClickCadeirante()
