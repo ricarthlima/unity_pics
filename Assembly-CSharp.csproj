@@ -62,6 +62,7 @@
     <Compile Include="Assets\Assets-MG02\Scripts\MG02GameController.cs" />
     <Compile Include="Assets\Assets-MG02\Scripts\MG02Colors.cs" />
     <Compile Include="Assets\Assets-MG03\Scripts\MG03CardController.cs" />
+    <Compile Include="Assets\Assets-MG03\Scripts\MG03InGameAreasController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
