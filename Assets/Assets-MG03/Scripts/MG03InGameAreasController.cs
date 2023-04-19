@@ -41,7 +41,7 @@ public class MG03InGameAreasController : MonoBehaviour
                 else
                 {
                     m_Camera.orthographicSize += 1 * Time.deltaTime * 2;
-                    if (m_Camera.orthographicSize >= 3.4f)
+                    if (m_Camera.orthographicSize >= 4.42f)
                     {
                         animateCamera = false;
                         isTouchedZoom = false;

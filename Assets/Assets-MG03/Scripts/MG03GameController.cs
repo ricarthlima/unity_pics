@@ -13,11 +13,21 @@ public class MG03GameController : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private GameObject uiGameObject;
+    [SerializeField] private GameObject uiIndicadorAcessibilidadeObjetivo;
+
+    [Header("Prefabs")]
+    [SerializeField] private GameObject areaClickPrefab;
     
 
     [Header("Game")]
     public bool canInteract = false;
     [SerializeField] int round = 0;
+    bool moveCamera = false;
+    List<Layers> remainingLayers = new List<Layers>() 
+    { Layers.AuditivoLibras, Layers.AuditivoMapa, 
+        Layers.FisicoAreaReservada, Layers.FisicoRampa , 
+        Layers.FisicoPortasLargas, Layers.Nanismo, 
+        Layers.VisualBraille, Layers.VisualPiso,};
 
     void Start()
     {
@@ -40,23 +50,42 @@ public class MG03GameController : MonoBehaviour
                 uiGameObject.SetActive(true);
                 StartGame();
             }
-        }      
+        }  
+        
+        if (moveCamera)
+        {
+            m_Camera.orthographicSize -= 1.7f * Time.deltaTime;
+            m_Camera.transform.position += 1.7f * Vector3.up  * Time.deltaTime;
+            if (m_Camera.orthographicSize <= 4.1 && m_Camera.transform.position.y > - 1.5)
+            {               
+                moveCamera = false;
+            }
+        }
     }
 
     void StartGame()
     {
         cardController.ShowCard(round);
     }
-
-   
-
-    
-
     
 
     public void CorrectCardSelect()
     {       
         cardController.HideCard();
+
+        uiIndicadorAcessibilidadeObjetivo.SetActive(true);
+        moveCamera = true;
+
+        foreach (Layers layer in remainingLayers)
+        {
+            areaClickPrefab.GetComponent<MG03AreaClickController>().layer = layer;
+            Instantiate(areaClickPrefab);
+        }
+    }
+
+    public void CorrectClickedDashedArea()
+    {
+        uiIndicadorAcessibilidadeObjetivo.SetActive(false);
 
         //TESTE
         // TODO: Testar condição de vitória
