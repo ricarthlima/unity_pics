@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 7599164867210638594}
   m_Layer: 0
   m_Name: AreaClickPrefab
-  m_TagString: Untagged
+  m_TagString: Area
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38e0e043e64eb584390895ab2e37bf79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layer: 3
+  layer: 4
   clickButton: {fileID: 7599164866168529425}
   tracejado: {fileID: 7599164867083568160}
   auditivoInterprete: {fileID: 21300000, guid: 3ebc0c3307a031441bae8623f969ddda, type: 3}

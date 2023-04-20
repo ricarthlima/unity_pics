@@ -17,6 +17,8 @@ public class MG03InGameAreasController : MonoBehaviour
 
     SpriteRenderer toActiveSprite;
 
+    [SerializeField] private MG03GameController gameController;
+
     private void Update()
     {
         //Animate Camera
@@ -26,7 +28,7 @@ public class MG03InGameAreasController : MonoBehaviour
             {
                 m_Camera.orthographicSize -= 1 * Time.deltaTime * 2;
 
-                if (m_Camera.orthographicSize <= 2.45f)
+                if (m_Camera.orthographicSize <= 3f)
                 {
                     isTouchedZoom = true;
 
@@ -41,10 +43,12 @@ public class MG03InGameAreasController : MonoBehaviour
                 else
                 {
                     m_Camera.orthographicSize += 1 * Time.deltaTime * 2;
+                    m_Camera.transform.position += Vector3.down * Time.deltaTime * 2;
                     if (m_Camera.orthographicSize >= 4.42f)
                     {
                         animateCamera = false;
                         isTouchedZoom = false;
+                        gameController.ToNextRound();
                     }
                 }
 
@@ -53,7 +57,7 @@ public class MG03InGameAreasController : MonoBehaviour
 
     }
 
-    private void OnClickAnimation(Layers layer)
+    public void OnClickAnimation(Layers layer)
     {
         switch (layer)
         {

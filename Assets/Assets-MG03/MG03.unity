@@ -404,6 +404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardController: {fileID: 1082013626}
+  inGameAreasController: {fileID: 1405512744}
   m_Camera: {fileID: 616123476}
   uiGameObject: {fileID: 2134460343}
   uiIndicadorAcessibilidadeObjetivo: {fileID: 1065895689}
@@ -2933,6 +2934,7 @@ MonoBehaviour:
   VisualBraille: {fileID: 915664438}
   AuditivoLibras: {fileID: 1136352453}
   AuditivoMapa: {fileID: 1864766525}
+  gameController: {fileID: 64008588}
 --- !u!4 &1405512745
 Transform:
   m_ObjectHideFlags: 0

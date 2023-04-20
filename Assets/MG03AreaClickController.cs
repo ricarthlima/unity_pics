@@ -88,4 +88,9 @@ public class MG03AreaClickController : MonoBehaviour
             }
         }
     }
+
+    public void IncorrectClick()
+    {
+        gameObject.SetActive(false);
+    }
 }
