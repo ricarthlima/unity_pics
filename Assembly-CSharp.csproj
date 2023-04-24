@@ -63,8 +63,9 @@
     <Compile Include="Assets\Assets-MG03\Scripts\MG03InGameAreasController.cs" />
     <Compile Include="Assets\Assets-MG02\Scripts\MG02Colors.cs" />
     <Compile Include="Assets\Assets-MG03\Scripts\MG03CardController.cs" />
-    <Compile Include="Assets\MG03AreaClickController.cs" />
-    <Compile Include="Assets\MG03CameraController.cs" />
+    <Compile Include="Assets\Assets-MG03\Scripts\MG03AreaClickController.cs" />
+    <Compile Include="Assets\Assets-MG03\Scripts\MG03CameraController.cs" />
+    <Compile Include="Assets\SceneController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
