@@ -405,7 +405,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardController: {fileID: 1082013626}
   inGameAreasController: {fileID: 1405512744}
-  m_Camera: {fileID: 616123476}
+  cameraController: {fileID: 616123478}
   uiGameObject: {fileID: 2134460343}
   uiIndicadorAcessibilidadeObjetivo: {fileID: 1065895689}
   areaClickPrefab: {fileID: 7599164867210638652, guid: 2375189b216f6f04591b268f8dc9ae50, type: 3}
@@ -880,6 +880,7 @@ GameObject:
   - component: {fileID: 616123477}
   - component: {fileID: 616123476}
   - component: {fileID: 616123475}
+  - component: {fileID: 616123478}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -953,6 +954,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &616123478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 616123474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8685badf460e1e4ea16d753ffe5c1fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameController: {fileID: 64008588}
+  inGameAreasController: {fileID: 1405512744}
 --- !u!1 &626921509
 GameObject:
   m_ObjectHideFlags: 0
@@ -2924,8 +2939,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d3d848cc9d1b804bb6f645c7ac0e02b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Camera: {fileID: 616123476}
-  isToMove: 0
+  cameraController: {fileID: 616123478}
   FisicoRampa: {fileID: 31205850}
   FisicoAreaReservada: {fileID: 1438202830}
   FisicoPortasLargas: {fileID: 614511190}

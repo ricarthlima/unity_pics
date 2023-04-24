@@ -8,9 +8,9 @@ public class MG03GameController : MonoBehaviour
     [Header("Controlllers")]
     [SerializeField] MG03CardController cardController;
     [SerializeField] private MG03InGameAreasController inGameAreasController;
+    [SerializeField] private MG03CameraController cameraController;
 
-    [Header("Camera")]
-    [SerializeField] private Camera m_Camera;
+
 
     [Header("UI")]
     [SerializeField] private GameObject uiGameObject;
@@ -23,7 +23,8 @@ public class MG03GameController : MonoBehaviour
     [Header("Game")]
     public bool canInteract = false;
     [SerializeField] int round = 0;
-    bool moveCamera = false;
+
+
     List<Layers> remainingLayers = new List<Layers>() 
     { Layers.AuditivoLibras, Layers.AuditivoMapa, 
         Layers.FisicoAreaReservada, Layers.FisicoRampa , 
@@ -33,40 +34,19 @@ public class MG03GameController : MonoBehaviour
     void Start()
     {
         uiGameObject.SetActive(false);
-        m_Camera.gameObject.transform.position = new Vector3(-1.51f, -3f, -10);
+        cameraController.StartAnimation();
     }
 
     // Update is called once per frame
     void Update()
     {
         VerifyClick();
-        if (m_Camera.gameObject.transform.position.y <= -2.11f)
-        {
-            m_Camera.gameObject.transform.position += new Vector3(0, 1, 0) * Time.deltaTime * 0.5f;
-        }
-        else
-        {
-            if (!canInteract)
-            {
-                canInteract = true;
-                uiGameObject.SetActive(true);
-                StartGame();
-            }
-        }  
         
-        if (moveCamera)
-        {
-            m_Camera.orthographicSize -= 1.7f * Time.deltaTime;
-            m_Camera.transform.position += 1.7f * Vector3.up  * Time.deltaTime;
-            if (m_Camera.orthographicSize <= 4.1 && m_Camera.transform.position.y > - 1.5)
-            {               
-                moveCamera = false;
-            }
-        }
     }
 
-    void StartGame()
+    public void StartGame()
     {
+        uiGameObject.SetActive(true);
         cardController.ShowCard(round);
     }
 
@@ -90,11 +70,12 @@ public class MG03GameController : MonoBehaviour
     
 
     public void CorrectCardSelect()
-    {       
+    {
         cardController.HideCard();
 
+        cameraController.AreaAnimation();        
+
         uiIndicadorAcessibilidadeObjetivo.SetActive(true);
-        moveCamera = true;
 
         foreach (Layers layer in remainingLayers)
         {
@@ -148,7 +129,7 @@ public class MG03GameController : MonoBehaviour
 
         if (correctList.Contains(layerFromTouch))
         {
-            CorrectClickedDashedArea(layerFromTouch);
+            CorrectClickedDashedArea(layerFromTouch, areaTouched);
         }
         else
         {
@@ -156,14 +137,13 @@ public class MG03GameController : MonoBehaviour
         }
     }
 
-    public void CorrectClickedDashedArea(Layers layer)
+    public void CorrectClickedDashedArea(Layers layer, GameObject areaTouched)
     {
         remainingLayers.Remove(layer);
         uiIndicadorAcessibilidadeObjetivo.SetActive(false);
         DestroyAllAreas();
 
-        inGameAreasController.OnClickAnimation(layer);    
-
+        inGameAreasController.OnClickAnimation(layer, areaTouched);
     }
 
     public void ToNextRound()

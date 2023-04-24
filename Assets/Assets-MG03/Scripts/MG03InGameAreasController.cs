@@ -5,15 +5,12 @@ using static MG03GameController;
 
 public class MG03InGameAreasController : MonoBehaviour
 {
-    [Header("Camera")]
-    [SerializeField] private Camera m_Camera;
-    private bool animateCamera = false;
-    private bool isTouchedZoom = false;
+    [SerializeField] MG03CameraController cameraController;
+
+    private bool isLerpLayer = false;
 
     [Header("Layers")]
-    [SerializeField] private bool isToMove;
     [SerializeField] private SpriteRenderer FisicoRampa, FisicoAreaReservada, FisicoPortasLargas, Nanismo, VisualPiso, VisualBraille, AuditivoLibras, AuditivoMapa;
-
 
     SpriteRenderer toActiveSprite;
 
@@ -21,43 +18,10 @@ public class MG03InGameAreasController : MonoBehaviour
 
     private void Update()
     {
-        //Animate Camera
-        if (animateCamera)
-        {
-            if (!isTouchedZoom)
-            {
-                m_Camera.orthographicSize -= 1 * Time.deltaTime * 2;
-
-                if (m_Camera.orthographicSize <= 3f)
-                {
-                    isTouchedZoom = true;
-
-                }
-            }
-            else
-            {
-                if (toActiveSprite != null)
-                {
-                    LerpLayer();
-                }
-                else
-                {
-                    m_Camera.orthographicSize += 1 * Time.deltaTime * 2;
-                    m_Camera.transform.position += Vector3.down * Time.deltaTime * 2;
-                    if (m_Camera.orthographicSize >= 4.42f)
-                    {
-                        animateCamera = false;
-                        isTouchedZoom = false;
-                        gameController.ToNextRound();
-                    }
-                }
-
-            }
-        }
-
+        DoLerpLayer();
     }
 
-    public void OnClickAnimation(Layers layer)
+    public void OnClickAnimation(Layers layer, GameObject areaTouched)
     {
         switch (layer)
         {
@@ -87,16 +51,26 @@ public class MG03InGameAreasController : MonoBehaviour
                 break;
         }
 
-        animateCamera = true;
+        cameraController.ShowLayerInAnimation(areaTouched.transform.position);
     }
 
-    private void LerpLayer()
+    public void LerpLayer()
     {
-        toActiveSprite.color = Color.Lerp(toActiveSprite.color, Color.white, Time.deltaTime * 10);
-        if (toActiveSprite.color == Color.white)
+        isLerpLayer = true;
+    }
+
+    private void DoLerpLayer()
+    {
+        if (isLerpLayer)
         {
-            toActiveSprite = null;
-        }
+            toActiveSprite.color = Color.Lerp(toActiveSprite.color, Color.white, Time.deltaTime * 10);
+            if (toActiveSprite.color == Color.white)
+            {
+                isLerpLayer = false;
+                toActiveSprite = null;
+                cameraController.ShowLayerOutAnimation();
+            }
+        }        
     }
 }
 
