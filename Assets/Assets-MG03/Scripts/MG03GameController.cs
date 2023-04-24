@@ -15,6 +15,7 @@ public class MG03GameController : MonoBehaviour
     [Header("UI")]
     [SerializeField] private GameObject uiGameObject;
     [SerializeField] private GameObject uiIndicadorAcessibilidadeObjetivo;
+    [SerializeField] private GameObject uiPanelWin;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject areaClickPrefab;
@@ -148,10 +149,16 @@ public class MG03GameController : MonoBehaviour
 
     public void ToNextRound()
     {
-        //TESTE
         // TODO: Testar condição de vitória
-        round += 1;
-        cardController.ShowCard(round);
+        if (remainingLayers.Count == 0)
+        {
+            uiPanelWin.SetActive(true);
+        }
+        else
+        {
+            round += 1;
+            cardController.ShowCard(round);
+        }        
     }
 
     void DestroyAllAreas()
