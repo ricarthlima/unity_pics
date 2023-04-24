@@ -49,7 +49,8 @@ public class GridGenerator : MonoBehaviour
                 blockController.baseColor = currentColor;
 
                 //if (j == 0 || j == gridColumns - 1)
-                if (j == 0 || j ==4 || j == 5 || j == 6 || j == gridColumns - 1)
+                //if (j == 0 || j ==4 || j == 5 || j == 6 || j == gridColumns - 1)
+                if (j == 0 || j == 5 || j == gridColumns - 1)
                 {
                     blockController.isStatic = true;
                 }
