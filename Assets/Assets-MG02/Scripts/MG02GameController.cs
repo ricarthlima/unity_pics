@@ -4,97 +4,99 @@ using TMPro;
 using UnityEngine;
 
 public class MG02GameController : MonoBehaviour
-{
-    [HideInInspector] public GameObject blockSelected;
-    public GameObject gridGeneratorGameObject;
-    GridGenerator gridGenerator;
-
-    int countMoves = 0;
-
+{      
     [Header("Canva")]
     [SerializeField] private TextMeshProUGUI textMoves;
     [SerializeField] private TextMeshProUGUI textTime;
     [SerializeField] private GameObject[] listTextLines;
 
-    [Header("Shuffle")]
-    bool isShuffled = false;
-    float countToShuffle = 0;
+    // Para controle do jogo
+    private GameObject blockSelected;
+    [HideInInspector] public bool canClick = false;
+    [HideInInspector] public List<List<GameObject>> blockInRightPositions;
+    int arrivedBlocks = 0;
 
-    bool canClick = false;
-
+    // Contadores de Progresso
+    int countMoves = 0;
     float timeCount = 0;
 
-    private void Start()
-    {
-        gridGenerator = gridGeneratorGameObject.GetComponent<GridGenerator>();
-    }
+    // Outros
+    bool isPaused = false;
 
     private void Update()
     {
         VerifyClick();
-        NeedToShuffle();
         UpdateTime();
     }
 
+    /// <summary>
+    /// Contabiliza o tempo passado desde o começo do jogo
+    /// </summary>
     private void UpdateTime()
     {
-        timeCount += Time.deltaTime;
-        textTime.text = Mathf.FloorToInt(timeCount).ToString();
-    }
-
-    void NeedToShuffle()
-    {
-        if (!isShuffled && gridGenerator.isFinishedInstantiate)
+        if (!isPaused)
         {
-            countToShuffle += Time.deltaTime;
-            if (countToShuffle < 1)
-            {
-                return;
-            }
+            timeCount += Time.deltaTime;
+            textTime.text = Mathf.FloorToInt(timeCount).ToString();
+        }        
+    }    
 
-            int centerList = (gridGenerator.toShuffleBlocks.Count / 2);
-            List<GameObject> listKings = gridGenerator.toShuffleBlocks.GetRange(0, centerList);
-            List<GameObject> listQueens = gridGenerator.toShuffleBlocks.GetRange(centerList, centerList);
-
-            foreach (GameObject king in listKings)
-            {
-                int queenNumber = Random.Range(0, listQueens.Count-1);
-                GameObject chosenQueen = listQueens[queenNumber];
-
-                king.GetComponent<BlockController>().MoveTo(chosenQueen.transform.position);
-                chosenQueen.GetComponent<BlockController>().MoveTo(king.transform.position);
-
-                listQueens.RemoveAt(queenNumber);
-            }
-            isShuffled = true;
-            canClick = true;
-        }
-       
-    }
-
+    /// <summary>
+    /// Verifica se algum clique ocorreu, trata o clique de acordo com o colisor que foi encontrado.
+    /// </summary>
     void VerifyClick()
     {
-        if (canClick && Input.GetMouseButtonDown(0))
+        if (canClick)
         {
-            RaycastHit2D[] hits = Physics2D.RaycastAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-            foreach (RaycastHit2D hit in hits)
+            bool isClicked = false;
+            Vector2 touchPosition = Vector2.negativeInfinity;
+
+            if (Input.GetMouseButtonDown(0))
             {
-                if (hit.collider != null )
+                touchPosition = Input.mousePosition;
+                isClicked = true;
+            }
+            
+            if (Input.touchCount > 0)
+            {
+                Touch touch = Input.GetTouch(0);
+
+                if (touch.phase == TouchPhase.Ended)
                 {
-                    if (hit.collider.CompareTag("Block"))
+                    touchPosition = touch.position;
+                    isClicked = true;
+                }
+            }
+
+            if (isClicked)
+            {
+                RaycastHit2D[] hits = Physics2D.RaycastAll(Camera.main.ScreenToWorldPoint(touchPosition), Vector2.zero);
+                foreach (RaycastHit2D hit in hits)
+                {
+                    if (hit.collider != null)
                     {
-                        OnBlockTouched(hit.collider.gameObject);
+                        if (hit.collider.CompareTag("Block"))
+                        {
+                            OnBlockTouched(hit.collider.gameObject);
+                        }
                     }
                 }
             }
         }
     }
 
+    /// <summary>
+    /// Comportamento de clique para o bloco:
+    /// Primeiro verifica-se se o bloco está estático, se for o caso, nada acontece.
+    /// Depois verifica-se se já existe um bloco selecionado, e não for o caso, esse bloco é selecionado.
+    /// Se já existir um bloco selecionado os blocos trocam de posição.
+    /// </summary>
+    /// <param name="block"></param>
     public void OnBlockTouched(GameObject block)
     {
-        BlockController blockClickedController = block.GetComponent<BlockController>();
+        MG02BlockController blockClickedController = block.GetComponent<MG02BlockController>();
 
-        if (!blockClickedController.isStatic)
+        if (!blockClickedController.isStatic && block != blockSelected)
         {
             if (blockSelected == null)
             {
@@ -103,7 +105,7 @@ public class MG02GameController : MonoBehaviour
             }
             else
             {
-                blockSelected.GetComponent<BlockController>().MoveTo(block.transform.position);
+                blockSelected.GetComponent<MG02BlockController>().MoveTo(block.transform.position);
                 blockClickedController.MoveTo(blockSelected.transform.position);
                 blockSelected = null;
                 canClick = false;
@@ -115,15 +117,25 @@ public class MG02GameController : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Verifica se os dois blocos sinalizaram chegada ao destino. 
+    /// Quando for o caso, libera o clique depois dos blocos terminarem de se movimentar e
+    /// verifica se alguma lista foi completa e/ou se o jogo foi finalizado.
+    /// </summary>
     public void FreeClick()
     {
-        canClick = true;
-        VerifyGameProgress();
+        arrivedBlocks += 1;
+
+        if (arrivedBlocks == 2)
+        {
+            canClick = true;
+            arrivedBlocks = 0;
+            VerifyGameProgress();
+        }        
     }
 
     void VerifyGameProgress()
     {
-        List<List<GameObject>> blockInRightPositions = gridGenerator.blockInRightPositions;
         bool isGameCompleted = true;
 
         for (int lineIndex = 0; lineIndex < blockInRightPositions.Count; lineIndex++)
@@ -134,7 +146,7 @@ public class MG02GameController : MonoBehaviour
 
             foreach (GameObject block in lineList)
             {
-                if (!block.GetComponent<BlockController>().isStatic)
+                if (!block.GetComponent<MG02BlockController>().isStatic)
                 {
                     isLineCompleted = false;
                     isGameCompleted = false;
@@ -155,11 +167,19 @@ public class MG02GameController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Mostra na tela a linha de texto referente a linha completada.
+    /// </summary>
+    /// <param name="index"></param>
     void LineCompleted(int index)
     {
         listTextLines[index].gameObject.SetActive(true);
     }
 
+    //TODO
+    /// <summary>
+    /// Método para executaro o fim do jogo
+    /// </summary>
     void EndGame()
     {
 

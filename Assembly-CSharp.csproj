@@ -58,11 +58,10 @@
   <ItemGroup>
     <Compile Include="Assets\Assets-MG03\Scripts\MG03CameraController.cs" />
     <Compile Include="Assets\Assets-MG03\Scripts\MG03GameController.cs" />
-    <Compile Include="Assets\Assets-MG02\Scripts\BlockController.cs" />
-    <Compile Include="Assets\Assets-MG02\Scripts\GridGenerator.cs" />
+    <Compile Include="Assets\Assets-MG02\Scripts\MG02BlockController.cs" />
+    <Compile Include="Assets\Assets-MG02\Scripts\MG02GridGenerator.cs" />
     <Compile Include="Assets\Assets-MG02\Scripts\MG02GameController.cs" />
     <Compile Include="Assets\Assets-MG03\Scripts\MG03InGameAreasController.cs" />
-    <Compile Include="Assets\Assets-MG02\Scripts\MG02Colors.cs" />
     <Compile Include="Assets\SceneController.cs" />
     <Compile Include="Assets\Assets-MG03\Scripts\MG03CardController.cs" />
     <Compile Include="Assets\Assets-MG03\Scripts\MG03AreaClickController.cs" />

@@ -255,7 +255,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Doenca 05
+  m_text: "Doen\xE7a 05"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0f8073b4a0122e046ae191002226c661, type: 2}
   m_sharedMaterial: {fileID: 8510371517106294474, guid: 0f8073b4a0122e046ae191002226c661, type: 2}
@@ -832,6 +832,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 8077998490146334948, guid: 7b0b646c81729404c92ca73e081ad7fc, type: 3}
+      propertyPath: gameController
+      value: 
+      objectReference: {fileID: 1885359364}
+    - target: {fileID: 8077998490146334948, guid: 7b0b646c81729404c92ca73e081ad7fc, type: 3}
       propertyPath: rateStaticBlocks
       value: 0
       objectReference: {fileID: 0}
@@ -1085,11 +1089,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b0b646c81729404c92ca73e081ad7fc, type: 3}
---- !u!1 &380986288 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8077998490146334949, guid: 7b0b646c81729404c92ca73e081ad7fc, type: 3}
-  m_PrefabInstance: {fileID: 304276442}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &414965164
 GameObject:
   m_ObjectHideFlags: 0
@@ -1391,7 +1390,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Doenca 01
+  m_text: "Doen\xE7a 01"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0f8073b4a0122e046ae191002226c661, type: 2}
   m_sharedMaterial: {fileID: 8510371517106294474, guid: 0f8073b4a0122e046ae191002226c661, type: 2}
@@ -1700,7 +1699,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Doenca 06
+  m_text: "Doen\xE7a 06"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0f8073b4a0122e046ae191002226c661, type: 2}
   m_sharedMaterial: {fileID: 8510371517106294474, guid: 0f8073b4a0122e046ae191002226c661, type: 2}
@@ -2193,7 +2192,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Doenca 02
+  m_text: "Doen\xE7a 02"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0f8073b4a0122e046ae191002226c661, type: 2}
   m_sharedMaterial: {fileID: 8510371517106294474, guid: 0f8073b4a0122e046ae191002226c661, type: 2}
@@ -2423,7 +2422,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Doenca 03
+  m_text: "Doen\xE7a 03"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0f8073b4a0122e046ae191002226c661, type: 2}
   m_sharedMaterial: {fileID: 8510371517106294474, guid: 0f8073b4a0122e046ae191002226c661, type: 2}
@@ -2850,7 +2849,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Doenca 04
+  m_text: "Doen\xE7a 04"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0f8073b4a0122e046ae191002226c661, type: 2}
   m_sharedMaterial: {fileID: 8510371517106294474, guid: 0f8073b4a0122e046ae191002226c661, type: 2}
@@ -3123,8 +3122,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5df61d300e1303548b7588c8dddbd343, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockSelected: {fileID: 0}
-  gridGeneratorGameObject: {fileID: 380986288}
   textMoves: {fileID: 1691610206}
   textTime: {fileID: 467662593}
   listTextLines:
@@ -3136,6 +3133,7 @@ MonoBehaviour:
   - {fileID: 860063034}
   - {fileID: 87061423}
   - {fileID: 186482988}
+  canClick: 0
 --- !u!4 &1885359365
 Transform:
   m_ObjectHideFlags: 0

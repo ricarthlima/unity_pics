@@ -2,20 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlockController : MonoBehaviour
+public class MG02BlockController : MonoBehaviour
 {
+    [HideInInspector] public MG02GameController gameController; // Informação recebida pelo GridGenerator
+
     [Header("Indicators")]
-    [SerializeField] private GameObject indicatorBlock;
     [SerializeField] private GameObject indicatorCircle;
     [SerializeField] private GameObject indicatorCorrect;
 
     [Header("Position Puzzle")]
-    public Vector3 correctPosition;
-    public bool isStatic = false;
+    public Vector3 correctPosition; // Informação recebida pelo GridGenerator
+    public bool isStatic = false; // Informação recebida pelo GridGenerator, alterada ao longo do jogo
+    public Color baseColor; // Informação recebida pelo GridGenerator
 
-    public Color baseColor;
-    float speed = 4;
-
+    // Configurações
+    readonly float speed = 4;
     Vector3 destination;
     bool isMoving;
 
@@ -29,8 +30,7 @@ public class BlockController : MonoBehaviour
             indicatorCorrect.SetActive(true);
         }
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         if (isMoving)
@@ -47,18 +47,25 @@ public class BlockController : MonoBehaviour
                     isStatic = true;
                 }
 
-                //TODO: Substituir por emit
-                GameObject.Find("MG02GameController").GetComponent<MG02GameController>().FreeClick();
+                //Avisa ao GameController que o bloco chegou na posição desejada
+                gameController.FreeClick();
             }
         }
     }
 
+    /// <summary>
+    /// Método público que inicia o movimento do bloco.
+    /// </summary>
+    /// <param name="position">Posição final que o bloco deve alcançar</param>
     public void MoveTo(Vector3 position)
     {
         isMoving = true;
         destination = position;
     }
 
+    /// <summary>
+    /// Ativar o indicador que mostra que esse bloco foi selecionado.
+    /// </summary>
     public void ShowIndicatorCircle()
     {
         indicatorCircle.SetActive(true);
