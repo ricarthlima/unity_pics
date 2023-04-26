@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MG03AreaClickController : MonoBehaviour
+public class MG03AreaTracejadaController : MonoBehaviour
 {
     [Header("Area")]
-    [SerializeField] public Layers layer;
+    [SerializeField] public MG03Areas area;
 
     [Header("Components")]
     [SerializeField] private GameObject clickButton;
@@ -16,51 +16,53 @@ public class MG03AreaClickController : MonoBehaviour
     [SerializeField] private Sprite auditivoInterprete;
     [SerializeField] private Sprite auditivoMapaTatil, cadeirantePortasLargas, cadeiranteRampa, cadeiranteReservado, nanismo, visualBraile, visualPisoTatil;
 
-    bool isMovingClicker = true;
-    float timeToMove;
-    
+    Vector3 toMove = Vector3.up;
+
+    /// <summary>
+    /// Posiciona o tracejado e o indicado conforme a área que foi definida.
+    /// </summary>
     void Start()
     {
         clickButtonInitialPos = clickButton.transform.localPosition;
 
-        switch (layer)
+        switch (area)
         {
-            case Layers.AuditivoMapa:
+            case MG03Areas.AuditivoMapa:
                 transform.position = new Vector3(-0.91f, -0.93f, 0);
                 tracejado.sprite = auditivoMapaTatil;
                 break;
 
-            case Layers.AuditivoLibras:
+            case MG03Areas.AuditivoLibras:
                 transform.position = new Vector3(-0.61f, -0.23f, 0);
                 tracejado.sprite = auditivoInterprete;
                 break;
 
-            case Layers.FisicoPortasLargas:
+            case MG03Areas.FisicoPortasLargas:
                 transform.position = new Vector3(-7.19f, -0.96f, 0);
                 tracejado.sprite = cadeirantePortasLargas;
                 break;
 
-            case Layers.FisicoAreaReservada:
+            case MG03Areas.FisicoAreaReservada:
                 transform.position = new Vector3(-1.14f, 1.89f, 0);
                 tracejado.sprite = cadeiranteReservado;
                 break;
 
-            case Layers.FisicoRampa:
+            case MG03Areas.FisicoRampa:
                 transform.position = new Vector3(-4, -3.59f, 0);
                 tracejado.sprite = cadeiranteRampa;
                 break;
 
-            case Layers.Nanismo:
+            case MG03Areas.Nanismo:
                 transform.position = new Vector3(-3.76f, -1, 0);
                 tracejado.sprite = nanismo;
                 break;
 
-            case Layers.VisualBraille:
+            case MG03Areas.VisualBraille:
                 transform.position = new Vector3(2.91f, -0.86f, 0);
                 tracejado.sprite = visualBraile;
                 break;
 
-            case Layers.VisualPiso:
+            case MG03Areas.VisualPiso:
                 transform.position = new Vector3(-2.04f, -1.91f, 0);
                 tracejado.sprite = visualPisoTatil;
                 break;
@@ -69,26 +71,28 @@ public class MG03AreaClickController : MonoBehaviour
 
         
     }
-
-    Vector3 toMove = Vector3.up;
+    
+    /// <summary>
+    /// O update apenas faz o indicador subir e descer.
+    /// </summary>
     void Update()
     {
-        if (isMovingClicker)
+        clickButton.transform.localPosition += (toMove * 0.5f * Time.deltaTime);
+
+        if (clickButton.transform.localPosition.y >= clickButtonInitialPos.y + 0.25f)
         {
-            clickButton.transform.localPosition += (toMove * 0.5f * Time.deltaTime);
+            toMove = Vector3.down;
+        }
 
-            if (clickButton.transform.localPosition.y >= clickButtonInitialPos.y + 0.25f)
-            {
-                toMove = Vector3.down;
-            }
-
-            if (clickButton.transform.localPosition.y <= clickButtonInitialPos.y)
-            {
-                toMove = Vector3.up;
-            }
+        if (clickButton.transform.localPosition.y <= clickButtonInitialPos.y)
+        {
+            toMove = Vector3.up;
         }
     }
 
+    /// <summary>
+    /// Método que define o que acontece se essa é uma área incorreta e foi clicada.
+    /// </summary>
     public void IncorrectClick()
     {
         gameObject.SetActive(false);

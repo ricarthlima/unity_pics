@@ -6,7 +6,7 @@ public class MG03CameraController : MonoBehaviour
 {
     [Header("Controllers")]
     [SerializeField] MG03GameController gameController;
-    [SerializeField] MG03InGameAreasController inGameAreasController;
+    [SerializeField] MG03LayerShowController inGameAreasController;
     Camera m_Camera;
 
     [Header("Triggers")]
@@ -15,8 +15,7 @@ public class MG03CameraController : MonoBehaviour
     bool isLayerInAnimation = false;
     bool isLayerOutAnimation = false;
 
-
-    [Header("Values")]
+    // Valores para controle
     Vector3 positionArea;
 
     readonly Vector3 initialPosition = new Vector3(-1.51f, -3f, -10);

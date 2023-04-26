@@ -61,10 +61,11 @@
     <Compile Include="Assets\Assets-MG02\Scripts\MG02BlockController.cs" />
     <Compile Include="Assets\Assets-MG02\Scripts\MG02GridGenerator.cs" />
     <Compile Include="Assets\Assets-MG02\Scripts\MG02GameController.cs" />
-    <Compile Include="Assets\Assets-MG03\Scripts\MG03InGameAreasController.cs" />
+    <Compile Include="Assets\Assets-MG03\Scripts\MG03LayerShowController.cs" />
     <Compile Include="Assets\SceneController.cs" />
     <Compile Include="Assets\Assets-MG03\Scripts\MG03CardController.cs" />
-    <Compile Include="Assets\Assets-MG03\Scripts\MG03AreaClickController.cs" />
+    <Compile Include="Assets\Assets-MG03\Scripts\MG03AreaTracejadaController.cs" />
+    <Compile Include="Assets\Assets-MG03\Scripts\MG03Areas.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

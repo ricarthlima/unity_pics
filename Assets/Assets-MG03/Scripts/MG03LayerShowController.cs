@@ -3,50 +3,53 @@ using System.Collections.Generic;
 using UnityEngine;
 using static MG03GameController;
 
-public class MG03InGameAreasController : MonoBehaviour
+/// <summary>
+/// Essa classe é um simples controlador para fazer a animação de aparição
+/// da layer contendo uma nova acessibilidade, na tela.
+/// </summary>
+public class MG03LayerShowController : MonoBehaviour
 {
-    [SerializeField] MG03CameraController cameraController;
-
-    private bool isLerpLayer = false;
+    [Header("Controllers")]
+    [SerializeField] private MG03GameController gameController;
+    [SerializeField] MG03CameraController cameraController;    
 
     [Header("Layers")]
     [SerializeField] private SpriteRenderer FisicoRampa, FisicoAreaReservada, FisicoPortasLargas, Nanismo, VisualPiso, VisualBraille, AuditivoLibras, AuditivoMapa;
 
     SpriteRenderer toActiveSprite;
-
-    [SerializeField] private MG03GameController gameController;
+    bool isLerpLayer = false;
 
     private void Update()
     {
         DoLerpLayer();
     }
 
-    public void OnClickAnimation(Layers layer, GameObject areaTouched)
+    public void OnClickAnimation(MG03Areas layer, GameObject areaTouched)
     {
         switch (layer)
         {
-            case Layers.FisicoRampa:
+            case MG03Areas.FisicoRampa:
                 toActiveSprite = FisicoRampa;
                 break;
-            case Layers.Nanismo:
+            case MG03Areas.Nanismo:
                 toActiveSprite = Nanismo;
                 break;
-            case Layers.FisicoAreaReservada:
+            case MG03Areas.FisicoAreaReservada:
                 toActiveSprite = FisicoAreaReservada;
                 break;
-            case Layers.FisicoPortasLargas:
+            case MG03Areas.FisicoPortasLargas:
                 toActiveSprite = FisicoPortasLargas;
                 break;
-            case Layers.VisualPiso:
+            case MG03Areas.VisualPiso:
                 toActiveSprite = VisualPiso;
                 break;
-            case Layers.VisualBraille:
+            case MG03Areas.VisualBraille:
                 toActiveSprite = VisualBraille;
                 break;
-            case Layers.AuditivoLibras:
+            case MG03Areas.AuditivoLibras:
                 toActiveSprite = AuditivoLibras;
                 break;
-            case Layers.AuditivoMapa:
+            case MG03Areas.AuditivoMapa:
                 toActiveSprite = AuditivoMapa;
                 break;
         }
@@ -59,6 +62,9 @@ public class MG03InGameAreasController : MonoBehaviour
         isLerpLayer = true;
     }
 
+    /// <summary>
+    /// Anima a aparição da layer
+    /// </summary>
     private void DoLerpLayer()
     {
         if (isLerpLayer)
@@ -74,4 +80,3 @@ public class MG03InGameAreasController : MonoBehaviour
     }
 }
 
-public enum Layers {FisicoRampa, FisicoAreaReservada, FisicoPortasLargas, Nanismo, VisualPiso, VisualBraille, AuditivoLibras, AuditivoMapa};

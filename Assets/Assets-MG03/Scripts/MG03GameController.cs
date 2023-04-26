@@ -7,7 +7,7 @@ public class MG03GameController : MonoBehaviour
 {
     [Header("Controlllers")]
     [SerializeField] MG03CardController cardController;
-    [SerializeField] private MG03InGameAreasController inGameAreasController;
+    [SerializeField] private MG03LayerShowController inGameAreasController;
     [SerializeField] private MG03CameraController cameraController;
 
 
@@ -26,11 +26,11 @@ public class MG03GameController : MonoBehaviour
     [SerializeField] int round = 0;
 
 
-    List<Layers> remainingLayers = new List<Layers>() 
-    { Layers.AuditivoLibras, Layers.AuditivoMapa, 
-        Layers.FisicoAreaReservada, Layers.FisicoRampa , 
-        Layers.FisicoPortasLargas, Layers.Nanismo, 
-        Layers.VisualBraille, Layers.VisualPiso,};
+    List<MG03Areas> remainingLayers = new List<MG03Areas>() 
+    { MG03Areas.AuditivoLibras, MG03Areas.AuditivoMapa, 
+        MG03Areas.FisicoAreaReservada, MG03Areas.FisicoRampa , 
+        MG03Areas.FisicoPortasLargas, MG03Areas.Nanismo, 
+        MG03Areas.VisualBraille, MG03Areas.VisualPiso,};
 
     void Start()
     {
@@ -78,53 +78,53 @@ public class MG03GameController : MonoBehaviour
 
         uiIndicadorAcessibilidadeObjetivo.SetActive(true);
 
-        foreach (Layers layer in remainingLayers)
+        foreach (MG03Areas layer in remainingLayers)
         {
-            areaClickPrefab.GetComponent<MG03AreaClickController>().layer = layer;
+            areaClickPrefab.GetComponent<MG03AreaTracejadaController>().area = layer;
             Instantiate(areaClickPrefab);
         }
     }
 
     void OnAreaTouched(GameObject areaTouched)
     {
-        Layers layerFromTouch = areaTouched.GetComponent<MG03AreaClickController>().layer;
+        MG03Areas layerFromTouch = areaTouched.GetComponent<MG03AreaTracejadaController>().area;
 
-        List<Layers> correctList = new List<Layers>();
+        List<MG03Areas> correctList = new List<MG03Areas>();
         switch (round)
         {
             case 0:
-                correctList.Add(Layers.FisicoPortasLargas);
-                correctList.Add(Layers.FisicoRampa);
-                correctList.Add(Layers.FisicoAreaReservada);
+                correctList.Add(MG03Areas.FisicoPortasLargas);
+                correctList.Add(MG03Areas.FisicoRampa);
+                correctList.Add(MG03Areas.FisicoAreaReservada);
                 break; 
             case 1:
-                correctList.Add(Layers.VisualPiso);
-                correctList.Add(Layers.VisualBraille);
+                correctList.Add(MG03Areas.VisualPiso);
+                correctList.Add(MG03Areas.VisualBraille);
                 break; 
             case 2:
-                correctList.Add(Layers.AuditivoLibras);
-                correctList.Add(Layers.AuditivoMapa);
+                correctList.Add(MG03Areas.AuditivoLibras);
+                correctList.Add(MG03Areas.AuditivoMapa);
                 break; 
             case 3:
-                correctList.Add(Layers.FisicoPortasLargas);
-                correctList.Add(Layers.FisicoRampa);
-                correctList.Add(Layers.FisicoAreaReservada);
+                correctList.Add(MG03Areas.FisicoPortasLargas);
+                correctList.Add(MG03Areas.FisicoRampa);
+                correctList.Add(MG03Areas.FisicoAreaReservada);
                 break; 
             case 4:
-                correctList.Add(Layers.Nanismo);
+                correctList.Add(MG03Areas.Nanismo);
                 break; 
             case 5:
-                correctList.Add(Layers.AuditivoLibras);
-                correctList.Add(Layers.AuditivoMapa);
+                correctList.Add(MG03Areas.AuditivoLibras);
+                correctList.Add(MG03Areas.AuditivoMapa);
                 break;
             case 6:
-                correctList.Add(Layers.VisualPiso);
-                correctList.Add(Layers.VisualBraille);
+                correctList.Add(MG03Areas.VisualPiso);
+                correctList.Add(MG03Areas.VisualBraille);
                 break;
             case 7:
-                correctList.Add(Layers.FisicoPortasLargas);
-                correctList.Add(Layers.FisicoRampa);
-                correctList.Add(Layers.FisicoAreaReservada);
+                correctList.Add(MG03Areas.FisicoPortasLargas);
+                correctList.Add(MG03Areas.FisicoRampa);
+                correctList.Add(MG03Areas.FisicoAreaReservada);
                 break;
         }
 
@@ -134,11 +134,11 @@ public class MG03GameController : MonoBehaviour
         }
         else
         {
-            areaTouched.GetComponent<MG03AreaClickController>().IncorrectClick();
+            areaTouched.GetComponent<MG03AreaTracejadaController>().IncorrectClick();
         }
     }
 
-    public void CorrectClickedDashedArea(Layers layer, GameObject areaTouched)
+    public void CorrectClickedDashedArea(MG03Areas layer, GameObject areaTouched)
     {
         remainingLayers.Remove(layer);
         uiIndicadorAcessibilidadeObjetivo.SetActive(false);
