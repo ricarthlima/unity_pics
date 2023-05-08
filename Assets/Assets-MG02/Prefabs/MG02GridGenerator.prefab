@@ -44,8 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ac375bdfa44cc4459a85e6d971aafce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameController: {fileID: 0}
   blockPrefab: {fileID: 6275558216711133193, guid: e2ead1d345dc0de4295e41e6164dfc65, type: 3}
   gridColumns: 11
+  startPoint: {x: -2.393, y: 1.222}
+  sizeCell: {x: 0.36, y: -0.36}
+  rateStaticBlocks: 0.5
   listColorsStart:
   - {r: 0.2784314, g: 0.27058825, b: 1, a: 0}
   - {r: 0.40392157, g: 0.3254902, b: 0.9098039, a: 0}
@@ -64,8 +68,5 @@ MonoBehaviour:
   - {r: 0.9019608, g: 0.9254902, b: 0.53333336, a: 0}
   - {r: 0.99607843, g: 0.95686275, b: 0.44313726, a: 0}
   - {r: 0.99607843, g: 0.95686275, b: 0.73333335, a: 0}
-  startPoint: {x: -2.469, y: 1.174}
-  sizeCell: {x: 0.36, y: -0.36}
-  rateStaticBlocks: 0.5
   toShuffleBlocks: []
   isFinishedInstantiate: 0

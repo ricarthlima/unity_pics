@@ -6,6 +6,8 @@ public class MG02BlockController : MonoBehaviour
 {
     [HideInInspector] public MG02GameController gameController; // Informação recebida pelo GridGenerator
 
+    private float alphaColor = 0.850f;
+
     [Header("Indicators")]
     [SerializeField] private GameObject indicatorCircle;
     [SerializeField] private GameObject indicatorCorrect;
@@ -22,7 +24,7 @@ public class MG02BlockController : MonoBehaviour
 
     void Start()
     {
-        Color newColor = new Color(baseColor.r, baseColor.g, baseColor.b, 0.666f);
+        Color newColor = new Color(baseColor.r, baseColor.g, baseColor.b, alphaColor);
         GetComponent<SpriteRenderer>().color = newColor;
 
         if (isStatic)
