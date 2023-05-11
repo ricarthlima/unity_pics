@@ -14,6 +14,7 @@ public class MG05GridController : MonoBehaviour
     public GameObject[] listCards;
     public GameObject[] listGridEscondidos;
 
+
     List<MG05PartesCorpo> listPartes = new List<MG05PartesCorpo>() {
     MG05PartesCorpo.Bexiga,
     MG05PartesCorpo.Boca,
@@ -32,6 +33,40 @@ public class MG05GridController : MonoBehaviour
     };
 
     bool canClick;
+
+    bool isMostrandoCardErrado = false;
+    float timeMostrandoCardErrado = 0;
+    readonly float waitMostrandoCardErrado = 1;
+    int posicaoCardErrado = -1;
+
+    bool isMostrandoCards = false;
+    float timeMostrandoCards = 0;
+    readonly float waitMostrandoCards = 5;
+
+    private void Update()
+    {
+        // Temporizadores
+        if (isMostrandoCardErrado)
+        {
+            timeMostrandoCardErrado += Time.deltaTime;
+            if (timeMostrandoCardErrado > waitMostrandoCardErrado)
+            {
+                isMostrandoCardErrado = false;
+                CardErrado();
+            }
+
+        }
+
+        if (isMostrandoCards)
+        {
+            timeMostrandoCards += Time.deltaTime;
+            if (timeMostrandoCards > waitMostrandoCards)
+            {
+                isMostrandoCards = false;
+                EspereParaEsconder();
+            }
+        }
+    }
 
     public void SortearGrid()
     {
@@ -59,8 +94,9 @@ public class MG05GridController : MonoBehaviour
             ToggleMostrarEscondidos(false);
         }
 
-        // Cobrir com Escondidos
-        StartCoroutine(EspereParaEsconder(5));
+        // Mostrar card por um tempo, depois esconder
+         isMostrandoCards = true;
+         timeMostrandoCards = 0;
     }
 
     public void ButtonClicked(int posicao)
@@ -76,18 +112,19 @@ public class MG05GridController : MonoBehaviour
 
             if (!isCorrect)
             {
-                StartCoroutine(CardErrado(posicao));
+                timeMostrandoCardErrado = 0;
+                isMostrandoCardErrado = true;
+                posicaoCardErrado = posicao;
             }
         }
         
     }
 
-    IEnumerator CardErrado(int posicao)
+    void CardErrado()
     {
-        // Voltar com escondido e deixar vermelho
-        yield return new WaitForSeconds(1);
-        listGridEscondidos[posicao].GetComponent<Image>().enabled = true;
-        listGridEscondidos[posicao].GetComponent<Image>().color = Color.red;
+        // Voltar com escondido e deixar vermelho        
+        listGridEscondidos[posicaoCardErrado].GetComponent<Image>().enabled = true;
+        listGridEscondidos[posicaoCardErrado].GetComponent<Image>().color = Color.red;
         canClick = true;
     }
 
@@ -104,11 +141,11 @@ public class MG05GridController : MonoBehaviour
         }
     }
 
-    IEnumerator EspereParaEsconder(int seconds)
+    void EspereParaEsconder()
     {
-        yield return new WaitForSeconds(seconds);
         ToggleMostrarEscondidos(true);
         canClick = true;
+        gameController.FinishedStartMemoria();
     }
 
     List<MG05PartesCorpo> RandomizeList(List<MG05PartesCorpo> list)

@@ -89,6 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ff67dcd590ffd4478e436bec35cc117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  image: {fileID: 5366845237077149781}
   cardBexiga: {fileID: 21300000, guid: 2e663e71244210141aab33e35be833d2, type: 3}
   cardBoca: {fileID: 21300000, guid: 2c3d5a2d92be60448b324b20e58b1136, type: 3}
   cardCoracao: {fileID: 21300000, guid: 49bd8fe425445744e8cf61e4c2613248, type: 3}
