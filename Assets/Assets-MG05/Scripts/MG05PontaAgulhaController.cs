@@ -5,6 +5,7 @@ using UnityEngine;
 public class MG05PontaAgulhaController : MonoBehaviour
 {
     public MG05PartesCorpo? parteTocada;
+    [SerializeField] SpriteRenderer spriteRenderer;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -12,6 +13,11 @@ public class MG05PontaAgulhaController : MonoBehaviour
         {            
             parteTocada = collision.GetComponent<MG05OrelhaPartesController>().parteCorpo;
             Debug.Log(parteTocada);
+        }
+
+        if (collision.CompareTag("Orelha"))
+        {
+            spriteRenderer.color = new Color(255,0,0,0.3f);
         }
     }
 
@@ -22,5 +28,11 @@ public class MG05PontaAgulhaController : MonoBehaviour
             parteTocada = null;
             Debug.Log("SAIU");
         }
+
+        if (collision.CompareTag("Orelha"))
+        {
+            spriteRenderer.color = new Color(255, 0, 0, 0);
+        }
     }
+
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MG05AgulhaController : MonoBehaviour
 {
-    public MG05GameController gameController;
+    [HideInInspector] public MG05GameController gameController;
 
     bool isFollowingByMouse = false;
     bool isFollowingByTouch = false;

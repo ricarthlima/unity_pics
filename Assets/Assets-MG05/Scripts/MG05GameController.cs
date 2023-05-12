@@ -177,7 +177,7 @@ public class MG05GameController : MonoBehaviour
 
     void InstantiateAgulha()
     {
-        Instantiate(agulhaPrefab, new Vector2(-1.63f, -2.32f), Quaternion.identity);
+        Instantiate(agulhaPrefab, new Vector2(-1.51f, 0.29f), Quaternion.identity);
     }
 
     void VerifyClickDown()
