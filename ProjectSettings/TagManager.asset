@@ -9,6 +9,7 @@ TagManager:
   - Agulha
   - ParteOrelha
   - Orelha
+  - Flor
   layers:
   - Default
   - TransparentFX
