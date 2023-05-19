@@ -56,6 +56,8 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 9e23bd676cdc8224792dd1182e5fdfa0, type: 3}
   - {fileID: 2800000, guid: 004797d6e68293d469e80ba14d19959c, type: 3}
   - {fileID: 2800000, guid: 798b973d44db6da4eb8a17ef85cd7ec0, type: 3}
+  popupGameObject: {fileID: 0}
+  listPopupsSprites: []
   listButtons:
   - {fileID: 0}
   - {fileID: 0}

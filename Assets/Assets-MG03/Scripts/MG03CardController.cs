@@ -15,6 +15,10 @@ public class MG03CardController : MonoBehaviour
     [SerializeField] private RawImage imagePerson;
     [SerializeField] private Texture[] listPersonByRound;
 
+    [Header("Popups")]
+    [SerializeField] GameObject popupGameObject;
+    [SerializeField] private Sprite[] listPopupsSprites;
+
     [Header("Buttons")]
     [SerializeField] private Button[] listButtons;
 
@@ -89,17 +93,28 @@ public class MG03CardController : MonoBehaviour
 
         // Mostrar na tela
         groupCard.SetActive(true);
+
+        // Trabalho de Popup
+        popupGameObject.GetComponent<Image>().sprite = listPopupsSprites[round];
+        popupGameObject.SetActive(true);
     }
 
     public void HideCard()
     {
         ResetCard();
         groupCard.SetActive(false);
+        popupGameObject.SetActive(false);
+    }
+
+    public void HidePopup()
+    {
+        popupGameObject.SetActive(false);
     }
 
     public void ResetCard()
     {
         groupCard.SetActive(false);
+        popupGameObject.SetActive(false);
 
         correctButton = -1;
 
