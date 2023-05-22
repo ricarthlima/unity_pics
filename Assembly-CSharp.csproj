@@ -76,6 +76,7 @@
     <Compile Include="Assets\Assets-MG05\Scripts\MG05GameController.cs" />
     <Compile Include="Assets\Assets-MG03\Scripts\MG03AreaTracejadaController.cs" />
     <Compile Include="Assets\Assets-MG06\Scripts\MG06CactoController.cs" />
+    <Compile Include="Assets\Assets-MG06\Scripts\MG06OrbitController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
