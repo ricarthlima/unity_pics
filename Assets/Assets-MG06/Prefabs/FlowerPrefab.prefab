@@ -211,6 +211,9 @@ MonoBehaviour:
   gameController: {fileID: 0}
   spriteRenderer: {fileID: 42977977021885651}
   backgroundFlower: {fileID: 0}
+  textInspire: {fileID: 0}
+  textSegure: {fileID: 0}
+  textExpire: {fileID: 0}
   flowerSmaller: {fileID: 42977978922651762}
   flowerAnimation: {fileID: 42977976941223306}
   flowerComplete: {fileID: 42977977347722262}
