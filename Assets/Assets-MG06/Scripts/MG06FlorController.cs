@@ -31,7 +31,7 @@ public class MG06FlorController : MonoBehaviour
 
     float timeInspirando = 4;
     float timeSegurando = 6;    // (total) + 1
-    float timeExpirando = 11;   // (total) + 6
+    float timeExpirando = 11;   // (total) + 5 
 
     void Start()
     {

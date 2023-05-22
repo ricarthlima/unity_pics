@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MG06GameController : MonoBehaviour
@@ -7,9 +8,11 @@ public class MG06GameController : MonoBehaviour
     bool isClickedWithMouse = true;
     GameObject lastFlowerTouched;
 
+    [SerializeField] private GameObject panelEndgame;
+
     [Header("Flowers")]
     [SerializeField] private GameObject[] listFlowers;
-
+    [SerializeField] private GameObject[] listCactos;
     int round = 0;
 
     void Start()
@@ -27,7 +30,38 @@ public class MG06GameController : MonoBehaviour
     public void FlowerCicleComplete()
     {
         round++;
-        listFlowers[round].gameObject.SetActive(true);
+
+        if (round >= listFlowers.Length)
+        {
+            EndGame();
+        }
+        else
+        {
+            listFlowers[round].gameObject.SetActive(true);
+            UpdateCacto();
+        }
+        
+    }
+
+    void UpdateCacto()
+    {
+        int cactoAtual = Mathf.FloorToInt(round / 2);
+        for (int i = 0; i < listCactos.Length; i++) {
+            if (i == cactoAtual)
+            {
+                listCactos[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                //listCactos[i].gameObject.SetActive(false);
+            }
+        }
+
+    }
+
+    void EndGame()
+    {
+        panelEndgame.SetActive(true);
     }
 
     #region "Clicks"
