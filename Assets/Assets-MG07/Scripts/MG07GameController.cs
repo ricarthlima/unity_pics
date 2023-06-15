@@ -180,7 +180,7 @@ public class MG07GameController : MonoBehaviour
 
             case MG07DecorationEnum.Tree:
                 {
-                    //treeOld.SetActive(false);
+                    treeOld.GetComponent<Animator>().SetTrigger("OnHide");
 
                     if (choice == 0)
                     {
@@ -208,7 +208,7 @@ public class MG07GameController : MonoBehaviour
 
             case MG07DecorationEnum.House:
                 {
-                    //houseOld.SetActive(false);
+                    houseOld.GetComponent<Animator>().SetTrigger("OnHide");
                     if (choice == 0)
                     {
                         houseA.SetActive(true);
