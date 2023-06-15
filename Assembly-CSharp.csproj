@@ -57,7 +57,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Assets-MG03\Scripts\MG03CameraController.cs" />
+    <Compile Include="Assets\Assets-MG07\Scripts\MG07DecorationIconController.cs" />
     <Compile Include="Assets\Assets-MG05\Scripts\MG05PontaAgulhaController.cs" />
+    <Compile Include="Assets\Assets-MG07\Scripts\MG07DecorationEnum.cs" />
     <Compile Include="Assets\Assets-MG06\Scripts\MG06CactoController.cs" />
     <Compile Include="Assets\Assets-MG03\Scripts\MG03GameController.cs" />
     <Compile Include="Assets\Assets-MG02\Scripts\MG02BlockController.cs" />
@@ -71,15 +73,15 @@
     <Compile Include="Assets\Assets-MG05\Scripts\MG05OrelhaPartesController.cs" />
     <Compile Include="Assets\Assets-MG05\Scripts\MG05CardController.cs" />
     <Compile Include="Assets\Assets-MG05\Scripts\MG05PartesCorpo.cs" />
+    <Compile Include="Assets\Assets-MG07\Scripts\DestroySelf.cs" />
+    <Compile Include="Assets\Assets-MG07\Scripts\MG07DirtController.cs" />
     <Compile Include="Assets\Assets-MG03\Scripts\MG03Areas.cs" />
     <Compile Include="Assets\SceneController.cs" />
+    <Compile Include="Assets\Assets-MG07\Scripts\MG07GameController.cs" />
     <Compile Include="Assets\Assets-MG05\Scripts\MG05AgulhaController.cs" />
     <Compile Include="Assets\Assets-MG03\Scripts\MG03CardController.cs" />
     <Compile Include="Assets\Assets-MG05\Scripts\MG05GameController.cs" />
     <Compile Include="Assets\Assets-MG03\Scripts\MG03AreaTracejadaController.cs" />
-    <Compile Include="Assets\Assets-MG07\Scripts\MG07GameController.cs" />
-    <Compile Include="Assets\Assets-MG07\Scripts\MG07DirtController.cs" />
-    <Compile Include="Assets\Assets-MG07\Scripts\DestroySelf.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

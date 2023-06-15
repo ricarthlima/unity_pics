@@ -10,15 +10,23 @@ public class MG07GameController : MonoBehaviour
     [Header("Prefabs")]
     [SerializeField] private GameObject animationCleanPrefab;
 
-    int gamePhase = 0; // 0 - Clean | 
+    int gamePhase = 1; // 1 - Clean | 2 - Decorate | 3 - Grow
     bool canClick = true;
 
-    // Phase Zero
+    // Phase One
+    int activeDirtObjects = 0;
+
+    // Phase Two
+    [Header("Decoration Phase")]
+    [SerializeField] private GameObject decorationIconGroup;
+    [SerializeField] private GameObject uiCardWall, uiCardVase, uiCardGarden, uiCardHouse, uiCardTree;
+    [SerializeField] private GameObject animationWall, animationVase, animationGarden, animationHouse, animationTree;
+    [SerializeField] private GameObject vaseA, vaseB, wallA, wallB, gardenA, gardenB, houseOld, houseA, houseB, treeOld, treeA, treeB;
 
     void Start()
     {
-        PhaseZeroShowDirtObject();
-        PhaseZeroShowDirtObject();
+        PhaseOneShowDirtObject();
+        PhaseOneShowDirtObject();
     }
 
     void Update()
@@ -26,26 +34,194 @@ public class MG07GameController : MonoBehaviour
         VerifyClickDown();
     }
 
-    void PhaseZeroShowDirtObject()
+    #region "Phase One - Clean"
+
+    void PhaseOneShowDirtObject()
     {
         int randomIndex = Random.Range(0, listDirt.Count - 1);
         listDirt[randomIndex].GetComponent<MG07DirtController>().Activate();
         listDirt.RemoveAt(randomIndex);
+
+        activeDirtObjects++;
     }
 
-    public void PhaseZeroDirtClicked()
+    public void PhaseOneDirtClicked()
     {
+        activeDirtObjects--;
         if (listDirt.Count == 0)
         {
-            // Passar de fase
-            gamePhase = 1;
+            if (activeDirtObjects == 0)
+            {
+                PhaseTwoStart();
+            }
         }
         else
         {
-            PhaseZeroShowDirtObject();
-        }
-        
+            PhaseOneShowDirtObject();            
+        }        
     }
+
+    #endregion
+
+    #region "Phase One - Decoration"
+    void PhaseTwoStart()
+    {
+        // Passar de fase
+        gamePhase = 2;
+        decorationIconGroup.SetActive(true);
+    }
+
+    void PhaseTwoShowCard(MG07DecorationEnum decoration)
+    {
+        canClick = false;
+        decorationIconGroup.SetActive(false);
+
+        switch (decoration)
+        {
+            case MG07DecorationEnum.Wall:
+            {
+                    uiCardWall.SetActive(true);
+                    break;
+            }
+
+            case MG07DecorationEnum.Garden:
+                {
+                    uiCardGarden.SetActive(true);
+                    break;
+                }
+
+            case MG07DecorationEnum.Tree:
+                {
+                    uiCardTree.SetActive(true);
+                    break;
+                }
+
+            case MG07DecorationEnum.Vase:
+                {
+                    uiCardVase.SetActive(true);
+                    break;
+                }
+
+            case MG07DecorationEnum.House:
+                {
+                    uiCardHouse.SetActive(true);    
+                    break;
+                }
+        } 
+    }
+
+    public void PhaseTwoHouse(int choice)
+    {
+        PhaseTwoChoiceClicked(MG07DecorationEnum.House, choice);
+        animationHouse.SetActive(true);
+        uiCardHouse.SetActive(false);
+    }
+    public void PhaseTwoWall(int choice)
+    {
+        PhaseTwoChoiceClicked(MG07DecorationEnum.Wall, choice);
+        animationWall.SetActive(true);
+        uiCardWall.SetActive(false);
+    }
+
+    public void PhaseTwoGarden(int choice)
+    {
+        PhaseTwoChoiceClicked(MG07DecorationEnum.Garden, choice);
+        animationGarden.SetActive(true);
+        uiCardGarden.SetActive(false);
+    }
+
+    public void PhaseTwoTree(int choice)
+    {
+        PhaseTwoChoiceClicked(MG07DecorationEnum.Tree, choice);
+        animationTree.SetActive(true);
+        uiCardTree.SetActive(false);
+    }
+
+    public void PhaseTwoVase(int choice)
+    {
+        PhaseTwoChoiceClicked(MG07DecorationEnum.Vase, choice);
+        animationVase.SetActive(true);
+        uiCardVase.SetActive(false);
+    }
+
+
+    void PhaseTwoChoiceClicked(MG07DecorationEnum decoration, int choice)
+    {
+        canClick = true;
+        decorationIconGroup.SetActive(true);
+
+        switch (decoration)
+        {
+            case MG07DecorationEnum.Wall:
+                {
+                    if (choice == 0)
+                    {
+                        wallA.SetActive(true);
+                    }
+                    else
+                    {
+                        wallB.SetActive(true);
+                    }
+                    break;
+                }
+
+            case MG07DecorationEnum.Garden:
+                {
+                    if (choice == 0)
+                    {
+                        gardenA.SetActive(true);
+                    }
+                    else
+                    {
+                        gardenB.SetActive(true);
+                    }
+                    break;
+                }
+
+            case MG07DecorationEnum.Tree:
+                {
+                    //treeOld.SetActive(false);
+
+                    if (choice == 0)
+                    {
+                        treeA.SetActive(true);
+                    }
+                    else
+                    {
+                        treeB.SetActive(true);
+                    }
+                    break;
+                }
+
+            case MG07DecorationEnum.Vase:
+                {
+                    if (choice == 0)
+                    {
+                        vaseA.SetActive(true);
+                    }
+                    else
+                    {
+                        vaseB.SetActive(true);
+                    }
+                    break;
+                }
+
+            case MG07DecorationEnum.House:
+                {
+                    //houseOld.SetActive(false);
+                    if (choice == 0)
+                    {
+                        houseA.SetActive(true);
+                    }
+                    else
+                    {
+                        houseB.SetActive(true);
+                    }
+                    break;
+                }
+        }
+    }
+    #endregion
 
     #region Click and Touch
     void VerifyClickDown()
@@ -86,9 +262,16 @@ public class MG07GameController : MonoBehaviour
                             MG07DirtController controller = hit.collider.gameObject.GetComponent<MG07DirtController>();
                             if (controller.isActive)
                             {
-                                PhaseZeroDirtClicked();
+                                PhaseOneDirtClicked();
                                 controller.Clicked(animationCleanPrefab);
                             }
+                        }
+
+                        if (hit.collider.CompareTag("Decoration"))
+                        {
+                            MG07DecorationIconController controller = hit.collider.gameObject.GetComponent<MG07DecorationIconController>();
+                            PhaseTwoShowCard(controller.decoration);
+                            Destroy(controller.gameObject);
                         }
                     }
                 }
