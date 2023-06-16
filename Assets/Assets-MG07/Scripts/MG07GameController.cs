@@ -22,6 +22,7 @@ public class MG07GameController : MonoBehaviour
     [SerializeField] private GameObject uiCardWall, uiCardVase, uiCardGarden, uiCardHouse, uiCardTree;
     [SerializeField] private GameObject animationWall, animationVase, animationGarden, animationHouse, animationTree;
     [SerializeField] private GameObject vaseA, vaseB, wallA, wallB, gardenA, gardenB, houseOld, houseA, houseB, treeOld, treeA, treeB;
+    bool isChoosed = false;
 
     void Start()
     {
@@ -114,42 +115,71 @@ public class MG07GameController : MonoBehaviour
     {
         PhaseTwoChoiceClicked(MG07DecorationEnum.House, choice);
         animationHouse.SetActive(true);
-        uiCardHouse.SetActive(false);
+        PhaseTwoHighlight(uiCardHouse, choice);
     }
     public void PhaseTwoWall(int choice)
     {
         PhaseTwoChoiceClicked(MG07DecorationEnum.Wall, choice);
         animationWall.SetActive(true);
-        uiCardWall.SetActive(false);
+        PhaseTwoHighlight(uiCardWall, choice);
     }
 
     public void PhaseTwoGarden(int choice)
     {
         PhaseTwoChoiceClicked(MG07DecorationEnum.Garden, choice);
         animationGarden.SetActive(true);
-        uiCardGarden.SetActive(false);
+        PhaseTwoHighlight(uiCardGarden, choice);
     }
 
     public void PhaseTwoTree(int choice)
     {
         PhaseTwoChoiceClicked(MG07DecorationEnum.Tree, choice);
         animationTree.SetActive(true);
-        uiCardTree.SetActive(false);
+        PhaseTwoHighlight(uiCardTree, choice);
     }
 
     public void PhaseTwoVase(int choice)
     {
         PhaseTwoChoiceClicked(MG07DecorationEnum.Vase, choice);
         animationVase.SetActive(true);
-        uiCardVase.SetActive(false);
+        PhaseTwoHighlight(uiCardVase, choice);
     }
 
+    void PhaseTwoHighlight(GameObject panel, int choice)
+    {
+        GameObject highlightA = panel.transform.Find("HighlightA").gameObject;
+        GameObject highlightB = panel.transform.Find("HighlightB").gameObject;
+
+        if (choice == 0)
+        {
+            highlightA.SetActive(true);
+            highlightB.SetActive(false);
+        }
+        else
+        {
+            highlightA.SetActive(false);
+            highlightB.SetActive(true);
+        }
+    }
+
+    public void PhaseTwoButtonOKClicked()
+    {
+        if (isChoosed)
+        {
+            canClick = true;
+            decorationIconGroup.SetActive(true);
+            uiCardGarden.SetActive(false);
+            uiCardHouse.SetActive(false);
+            uiCardTree.SetActive(false);
+            uiCardVase.SetActive(false);
+            uiCardWall.SetActive(false);
+            isChoosed = false;
+        }        
+    }
 
     void PhaseTwoChoiceClicked(MG07DecorationEnum decoration, int choice)
     {
-        canClick = true;
-        decorationIconGroup.SetActive(true);
-
+        isChoosed = true;
         switch (decoration)
         {
             case MG07DecorationEnum.Wall:
@@ -157,9 +187,11 @@ public class MG07GameController : MonoBehaviour
                     if (choice == 0)
                     {
                         wallA.SetActive(true);
+                        wallB.SetActive(false);
                     }
                     else
                     {
+                        wallA.SetActive(false);
                         wallB.SetActive(true);
                     }
                     break;
@@ -170,9 +202,11 @@ public class MG07GameController : MonoBehaviour
                     if (choice == 0)
                     {
                         gardenA.SetActive(true);
+                        gardenB.SetActive(false);
                     }
                     else
                     {
+                        gardenA.SetActive(false);
                         gardenB.SetActive(true);
                     }
                     break;
@@ -185,9 +219,11 @@ public class MG07GameController : MonoBehaviour
                     if (choice == 0)
                     {
                         treeA.SetActive(true);
+                        treeB.SetActive(false);
                     }
                     else
                     {
+                        treeA.SetActive(false);
                         treeB.SetActive(true);
                     }
                     break;
@@ -198,9 +234,11 @@ public class MG07GameController : MonoBehaviour
                     if (choice == 0)
                     {
                         vaseA.SetActive(true);
+                        vaseB.SetActive(false);
                     }
                     else
                     {
+                        vaseA.SetActive(false);
                         vaseB.SetActive(true);
                     }
                     break;
@@ -212,9 +250,11 @@ public class MG07GameController : MonoBehaviour
                     if (choice == 0)
                     {
                         houseA.SetActive(true);
+                        houseB.SetActive(false);
                     }
                     else
                     {
+                        houseA.SetActive(false);
                         houseB.SetActive(true);
                     }
                     break;

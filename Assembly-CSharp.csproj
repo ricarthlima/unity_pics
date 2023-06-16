@@ -82,6 +82,7 @@
     <Compile Include="Assets\Assets-MG03\Scripts\MG03CardController.cs" />
     <Compile Include="Assets\Assets-MG05\Scripts\MG05GameController.cs" />
     <Compile Include="Assets\Assets-MG03\Scripts\MG03AreaTracejadaController.cs" />
+    <Compile Include="Assets\MG07CameraController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

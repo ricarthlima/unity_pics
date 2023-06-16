@@ -5,15 +5,23 @@ using UnityEngine;
 public class DestroySelf : MonoBehaviour
 {
     public float timeToWaitInSeconds;
-    float countTime = 0;
+    public bool justHide;
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        countTime += Time.deltaTime;
-        if (countTime >= timeToWaitInSeconds)
+        StartCoroutine(HideOrDestroy());
+    }
+
+    IEnumerator HideOrDestroy()
+    {
+        yield return new WaitForSeconds(timeToWaitInSeconds);
+        if (!justHide)
         {
             Destroy(gameObject);
+        }
+        else
+        {
+            gameObject.SetActive(false);
         }
     }
 }

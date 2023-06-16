@@ -119,4 +119,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 094f01f35d6117143853c8bae197300c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToWaitInSeconds: 1
+  timeToWaitInSeconds: 0.75
+  justHide: 1
